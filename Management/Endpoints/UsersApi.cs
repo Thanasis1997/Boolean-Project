@@ -14,7 +14,7 @@ namespace React_front_end.Endpoints
             app.MapDelete("/users/{id}", Delete);
             //app.MapGet("/authors/{id}", GetAuthor);
         }
-
+        //TODO create the api
         private static Task Delete(HttpContext context)
         {
             throw new NotImplementedException();

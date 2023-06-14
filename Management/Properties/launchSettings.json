@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "React_front_end": {
+    "Management": {
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7052;http://localhost:5173",

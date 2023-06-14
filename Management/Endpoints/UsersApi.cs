@@ -1,6 +1,9 @@
 ﻿using System;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Collections.Generic;
+using React_front_end.Repository;
+using Microsoft.AspNetCore.Http;
+using React_front_end.Models;
 
 namespace React_front_end.Endpoints
 {
@@ -25,9 +28,16 @@ namespace React_front_end.Endpoints
             throw new NotImplementedException();
         }
 
-        private static Task Get(HttpContext context)
+        private static async Task<IResult> Get(IUsersRepo<Users> repo)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Results.Ok(repo.GetAll());
+
+            }catch(Exception ex)
+            {
+                return Results.Problem(ex.Message);
+            }
         }
 
         private static Task Insert(HttpContext context)

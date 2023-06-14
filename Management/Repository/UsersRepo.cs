@@ -10,7 +10,6 @@ namespace React_front_end.Repository
         private DatabaseContext _db;
         public DbSet<T> _table = null;
 
-        public DbSet<T> Table => throw new NotImplementedException();
 
         public UsersRepo(DatabaseContext db)
         {
@@ -25,7 +24,7 @@ namespace React_front_end.Repository
 
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _table.ToList();
         }
 
         public IEnumerable<T> GetAll(params Expression<Func<T, object>>[] includeExpressions)
@@ -52,6 +51,7 @@ namespace React_front_end.Repository
         {
             throw new NotImplementedException();
         }
+        public DbSet<T> Table { get { return _table; } }
     }
 }
 

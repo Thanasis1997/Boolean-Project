@@ -11,7 +11,7 @@ using React_front_end.Data;
 namespace React_front_end.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230613100331_initial")]
+    [Migration("20230615075046_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -19,7 +19,7 @@ namespace React_front_end.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "7.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -44,6 +44,10 @@ namespace React_front_end.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("lastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("password")
                         .IsRequired()
                         .HasColumnType("text");
 

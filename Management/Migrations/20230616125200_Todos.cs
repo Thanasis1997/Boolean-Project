@@ -19,7 +19,8 @@ namespace React_front_end.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     tittle = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
-                    completed = table.Column<bool>(type: "boolean", nullable: false)
+                    completed = table.Column<bool>(type: "boolean", nullable: false),
+                    userId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

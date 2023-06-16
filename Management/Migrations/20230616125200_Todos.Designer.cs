@@ -11,7 +11,7 @@ using React_front_end.Data;
 namespace React_front_end.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230616103250_Todos")]
+    [Migration("20230616125200_Todos")]
     partial class Todos
     {
         /// <inheritdoc />
@@ -42,6 +42,9 @@ namespace React_front_end.Migrations
                     b.Property<string>("tittle")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

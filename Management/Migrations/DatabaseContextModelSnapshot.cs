@@ -40,6 +40,9 @@ namespace React_front_end.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("userId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.ToTable("Todos");

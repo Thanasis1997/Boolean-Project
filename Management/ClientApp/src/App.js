@@ -1,22 +1,52 @@
-import React, { Component } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import AppRoutes from './AppRoutes';
-import { Layout } from './components/Layout';
-import './custom.css';
+//import React from 'React';
+import React from 'react'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import './index.css'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 
-export default class App extends Component {
-  static displayName = App.name;
+import Login from './components/Login'
+import SignUp from './components/Signup'
 
-  render() {
+
+
+const App = () => {
     return (
-      <Layout>
-        <Routes>
-          {AppRoutes.map((route, index) => {
-            const { element, ...rest } = route;
-            return <Route key={index} {...rest} element={element} />;
-          })}
-        </Routes>
-      </Layout>
-    );
-  }
+        <Router>
+            <div className="App">
+                <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+                    <div className="container">
+                        <Link className="navbar-brand" to={'/sign-in'}>
+                            Todos Manager
+            </Link>
+                        <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to={'/sign-in'}>
+                                        Login
+                  </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to={'/sign-up'}>
+                                        Sign up
+                  </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div className="auth-wrapper">
+                    <div className="auth-inner">
+                        <Routes>
+                            <Route exact path="/" element={<Login />} />
+                            <Route path="/sign-in" element={<Login />} />
+                            <Route path="/sign-up" element={<SignUp />} />
+                        </Routes>
+                    </div>
+                </div>
+            </div>
+        </Router>
+    )
 }
+
+
+export default App;

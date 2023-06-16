@@ -9,7 +9,7 @@ namespace React_front_end.Repository
         IEnumerable<T> GetAll();
         IEnumerable<T> GetAll(params Expression<Func<T, object>>[] includeExpressions);
         T GetById(object id);
-        void Insert(T obj);
+        T Insert(T obj);
         void Update(T obj);
         void Delete(object id);
         void Save();

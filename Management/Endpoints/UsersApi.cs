@@ -15,17 +15,63 @@ namespace React_front_end.Endpoints
             app.MapGet("/users", Get);
             app.MapPut("/users/{id}", UpdateUsers);
             app.MapDelete("/users/{id}", Delete);
-            //app.MapGet("/authors/{id}", GetAuthor);
-        }
-        //TODO create the api
-        private static Task Delete(HttpContext context)
-        {
-            throw new NotImplementedException();
+            app.MapGet("/users/{id}", GetUser);
         }
 
-        private static Task UpdateUsers(HttpContext context)
+        private static async Task<IResult> GetUser(int id, IUsersRepo<Users> repo)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (!repo.Table.Any(x => x.Id == id)) return Results.NotFound($"User with id {id} not found");
+                return Results.Ok(repo.GetById(id));
+
+            }catch(Exception ex)
+            {
+                return Results.Problem(ex.Message);
+
+            }
+        }
+
+        
+        private static async Task<IResult> Delete(int id,IUsersRepo<Users> repo)
+        {
+            try
+            {
+                if (!repo.Table.Any(x => x.Id == id)) return Results.NotFound($"User with id {id} not found!");
+                repo.Delete(id);
+                return Results.Ok($"User with id {id} deleted");
+
+            }catch(Exception ex)
+            {
+                return Results.Problem(ex.Message);
+
+            }
+        }
+
+        private static async Task<IResult> UpdateUsers(int id, Users user, IUsersRepo<Users> repo)
+        {
+            try
+            {
+                if (user == null) return Results.NotFound();
+                if (!repo.Table.Any(x => x.Id == id)) return Results.NotFound($"The user with id {id} not found");
+
+                var m = repo.GetById(id);
+                m.firstName = user.firstName;
+                m.email = user.email;
+                m.lastName = user.lastName;
+                m.password = user.password;
+                m.phone = user.phone;
+                m.isAdmin = user.isAdmin;
+                repo.Update(m);
+                repo.Save();
+                return Results.Ok(user);
+
+
+            }catch(Exception ex)
+            {
+                return Results.Problem(ex.Message);
+
+            }
         }
 
         private static async Task<IResult> Get(IUsersRepo<Users> repo)
@@ -40,9 +86,18 @@ namespace React_front_end.Endpoints
             }
         }
 
-        private static Task Insert(HttpContext context)
+        private static  async Task<IResult> Insert(IUsersRepo<Users> repo, Users user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var adddeduser = repo.Insert(user);
+                return Results.Ok(adddeduser);
+            }
+            catch(Exception ex)
+            {
+                return Results.Problem(ex.Message);
+
+            }
         }
     }
 }

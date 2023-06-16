@@ -21,7 +21,7 @@ namespace React_front_end.Models
 
         public string phone { get; set; }
 
-		[JsonIgnore]
+	
 		public bool isAdmin { get; set; }
 	}
 }

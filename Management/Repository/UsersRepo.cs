@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using React_front_end.Data;
+using React_front_end.Models;
 
 namespace React_front_end.Repository
 {
@@ -19,7 +20,12 @@ namespace React_front_end.Repository
 
         public void Delete(object id)
         {
-            throw new NotImplementedException();
+            var user = _table.Find(id);
+            if (user != null)
+            {
+                _table.Remove(user);
+                Save();
+            }
         }
 
         public IEnumerable<T> GetAll()
@@ -34,22 +40,35 @@ namespace React_front_end.Repository
 
         public T GetById(object id)
         {
-            throw new NotImplementedException();
+            var user = _table.Find(id);
+            return user;
         }
 
-        public void Insert(T obj)
+        public T Insert(T obj)
         {
-            throw new NotImplementedException();
+            if (obj != null)
+            {
+                _table.Add(obj);
+                Save();
+                return obj;
+
+
+            }
+            return null;
+
+
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            _db.SaveChanges();
         }
 
         public void Update(T obj)
         {
-            throw new NotImplementedException();
+            _table.Attach(obj);
+            _db.Entry(obj).State = EntityState.Modified;
+            
         }
         public DbSet<T> Table { get { return _table; } }
     }

@@ -35,7 +35,13 @@ namespace React_front_end.Repository
 
         public IEnumerable<T> GetAll(params Expression<Func<T, object>>[] includeExpressions)
         {
-            throw new NotImplementedException();
+            if (includeExpressions.Any())
+            {
+                var set = includeExpressions
+                    .Aggregate<Expression<Func<T, object>>, IQueryable<T>>
+                     (_table, (current, expression) => current.Include(expression));
+            }
+            return _table.ToList();
         }
 
         public T GetById(object id)

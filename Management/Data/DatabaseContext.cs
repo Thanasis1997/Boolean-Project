@@ -29,6 +29,7 @@ namespace React_front_end.Data
         }
 
         public DbSet<Users> Users { get; set; }
+        public DbSet<Todos> Todos { get; set; }
     }
 }
 

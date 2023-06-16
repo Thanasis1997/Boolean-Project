@@ -11,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUsersRepo<Users>, UsersRepo<Users>>();
+builder.Services.AddScoped<IUsersRepo<Todos>, UsersRepo<Todos>>();
+
 builder.Services.AddDbContext<DatabaseContext>();
 
 var app = builder.Build();
@@ -25,6 +27,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.Configuretodos();
 app.ConfigureUsers();
 
 

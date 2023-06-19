@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Navigate, useLocation, Link } from "react-router-dom";
 import TodoList from "./TodoList";
+import Login from "./Login";
 const Tasks = () =>{
     // const navigate = useNavigate()
     //Todo make the component visible to logged in user
@@ -42,8 +43,14 @@ const Tasks = () =>{
       // filters the todos with to match the users id
       const [filteredData, setFilteredData] = useState([])
       useEffect(() => {
-        const filteredData = todos.filter((todo) => todo.userId === user.id);
-        setFilteredData(filteredData);
+        try{
+
+          const filteredData = todos.filter((todo) => todo.userId === user.id);
+          setFilteredData(filteredData);
+        }catch(error){
+          console.log(error);
+          navigate("/")
+        }
       }, [todos, user]);
 
       const redirect = () =>{
@@ -53,7 +60,7 @@ const Tasks = () =>{
 
 
 
-      console.log(user);
+
         return (
         <>
 
@@ -78,7 +85,7 @@ const Tasks = () =>{
         
         )
         
-
+      
     
 }
 

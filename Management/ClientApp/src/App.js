@@ -40,7 +40,7 @@ const Navbar = () => {
         <Link className="navbar-brand" to="/sign-in">
           Todos Manager
         </Link>
-        {!(location.pathname!== "/sign-in" && location.pathname!== "/sign-up") && (
+        {!(location.pathname!== "/sign-in" && location.pathname!== "/sign-up" && location.pathname!=="/") && (
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">

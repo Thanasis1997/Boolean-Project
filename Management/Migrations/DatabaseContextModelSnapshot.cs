@@ -45,6 +45,8 @@ namespace React_front_end.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("userId");
+
                     b.ToTable("Todos");
                 });
 
@@ -82,6 +84,17 @@ namespace React_front_end.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("React_front_end.Models.Todos", b =>
+                {
+                    b.HasOne("React_front_end.Models.Users", "user")
+                        .WithMany()
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("user");
                 });
 #pragma warning restore 612, 618
         }

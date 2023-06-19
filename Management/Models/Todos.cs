@@ -16,10 +16,9 @@ namespace React_front_end.Models
 
         public bool completed { get; set; } = false;
 
-		[ForeignKey("Users")]
-		public int userId { get; set; }
-
-		public Users user { get; set; }
-	}
+        [ForeignKey("Users")]
+        public int userId { get; set; }
+        public Users user { get; set; }
+    }
 }
 

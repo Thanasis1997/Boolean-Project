@@ -11,8 +11,8 @@ using React_front_end.Data;
 namespace React_front_end.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230615075046_initial")]
-    partial class initial
+    [Migration("20230619125409_AddUserForeignKeyToTodos")]
+    partial class AddUserForeignKeyToTodos
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,35 @@ namespace React_front_end.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("React_front_end.Models.Todos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("completed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("tittle")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("Todos");
+                });
 
             modelBuilder.Entity("React_front_end.Models.Users", b =>
                 {
@@ -58,6 +87,17 @@ namespace React_front_end.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("React_front_end.Models.Todos", b =>
+                {
+                    b.HasOne("React_front_end.Models.Users", "user")
+                        .WithMany()
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("user");
                 });
 #pragma warning restore 612, 618
         }

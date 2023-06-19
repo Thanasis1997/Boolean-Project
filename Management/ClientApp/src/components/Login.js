@@ -13,6 +13,8 @@ const Login = () => {
 }
     const [currentUser, setCurrentUser] = useState(initialstate)
     const [authenticated, setauthenticated] = useState(false);
+    const [message, setMessage] = useState("")
+    const [submited, setSubmited] = useState(false)
     
     useEffect(() => {
         const fetchData = async () => {
@@ -31,7 +33,7 @@ const Login = () => {
 
     const login = (e) =>{
         e.preventDefault();
-
+        setSubmited(true)
         // users.forEach(user =>{
         //     if(user.email === currentUser.email && user.password === currentUser.password){
         //         console.log("login");
@@ -55,8 +57,12 @@ const Login = () => {
           } else {
             setauthenticated(false);
             localStorage.removeItem("authenticated");
+            setMessage("Invalid email or password."); 
+            setCurrentUser(initialstate);
+
+            
           }
-          console.log(user);
+          console.log(authenticated);
             
         
         
@@ -118,6 +124,9 @@ const Login = () => {
                 Forgot <a href="#">password?</a>
             </p>
         </form>
+        {submited && authenticated === false && ( // Render the error message if authentication failed
+          <div className="alert alert-danger">{message}</div>
+        )}
         </>
     )
 

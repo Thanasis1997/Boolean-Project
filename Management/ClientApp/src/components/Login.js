@@ -50,16 +50,13 @@ const Login = () => {
           if (user) {
             setauthenticated(true);
             localStorage.setItem("authenticated", "true");
-            navigate("/Tasks");
-            <Link to={{
-                pathname: '/Tasks',
-                state: { user }
-              }}> </Link>
+            navigate("/Tasks", {state: {user}});
             setCurrentUser(initialstate);
           } else {
             setauthenticated(false);
             localStorage.removeItem("authenticated");
           }
+          console.log(user);
             
         
         

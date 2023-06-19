@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -12,6 +12,7 @@ const Login = () => {
     isAdmin: false
 }
     const [currentUser, setCurrentUser] = useState(initialstate)
+    const [authenticated, setauthenticated] = useState(false);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -31,14 +32,34 @@ const Login = () => {
     const login = (e) =>{
         e.preventDefault();
 
-        users.forEach(user =>{
-            if(user.email === currentUser.email && user.password === currentUser.password){
-                console.log("login");
-                navigate("/Tasks");
-                setCurrentUser(initialstate)
-            }
+        // users.forEach(user =>{
+        //     if(user.email === currentUser.email && user.password === currentUser.password){
+        //         console.log("login");
+        //         setauthenticated(true)
+        //         localStorage.setItem("authenticated", true);
+        //         setCurrentUser(initialstate)
+        //         navigate("/Tasks");
+        //     }
 
-        })
+        // })
+        const user = users.find(
+            (user) =>
+              user.email === currentUser.email && user.password === currentUser.password
+          );
+        
+          if (user) {
+            setauthenticated(true);
+            localStorage.setItem("authenticated", "true");
+            navigate("/Tasks");
+            <Link to={{
+                pathname: '/Tasks',
+                state: { user }
+              }}> </Link>
+            setCurrentUser(initialstate);
+          } else {
+            setauthenticated(false);
+            localStorage.removeItem("authenticated");
+          }
             
         
         

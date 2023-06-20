@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import '../index.css';
+
 const AddTodo = () =>{
     const location = useLocation()
     const { user } = location.state|| {};
@@ -51,8 +53,10 @@ const AddTodo = () =>{
           <div>
             <label>Title:</label>
             <input
+            className="form-control"
               type="text"
               name="tittle"
+              required
               value={newTodo.tittle}
               onChange={handleInputChange}
             />
@@ -60,13 +64,19 @@ const AddTodo = () =>{
           <div>
             <label>Description:</label>
             <input
+            className="form-control"
               type="text"
+              required
               name="description"
               value={newTodo.description}
               onChange={handleInputChange}
             />
           </div>
-          <button type="submit">Create Todo</button>
+          <div className="d-grid pt-3">
+
+            <button className="btn btn-primary"
+            type="submit">Create Todo</button>
+          </div>
         </form>
       );
     };

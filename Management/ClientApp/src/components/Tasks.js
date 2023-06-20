@@ -57,8 +57,18 @@ const Tasks = () =>{
             navigate("/AddTodo", {state: {user}});
 
       }
-
-
+      
+      const deleteTodo = async (id) => {
+        const options = { method: 'DELETE' };
+      
+        await fetch(`https://localhost:44419/todos/${id}`, options)
+          .then(response => response.json())
+          .then(response => console.log(response))
+          .catch(err => console.error(err));
+      
+        const updatedFilteredData = filteredData.filter(todo => todo.id !== id);
+        setFilteredData(updatedFilteredData);
+      };
 
 
         return (
@@ -67,8 +77,13 @@ const Tasks = () =>{
         <h2>{user?.firstName } {user?.lastName}</h2>
         <ul>
       {filteredData.map((todo) => (
+        
+      
         <li key={todo.id}>
           <p>{todo.tittle} | {todo.description}</p>
+          <button onClick={() => deleteTodo(todo.id)} className="btn btn-danger  btn-inline ms-3">Delete</button>
+          <button  className="btn btn-info btn-inline ms-3">Edit</button>
+
 
         </li>
         
@@ -76,7 +91,7 @@ const Tasks = () =>{
       ))}
     </ul>
 
-        <button className="primary" onClick={redirect}>Add Todo</button>
+        <button className="btn btn-primary" onClick={redirect}>Add Todo</button>
 
     </>
 

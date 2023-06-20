@@ -70,6 +70,10 @@ const Tasks = () =>{
         setFilteredData(updatedFilteredData);
       };
 
+      const handleChange= () =>{
+        //Todo
+      }
+
 
         return (
         <>
@@ -80,7 +84,7 @@ const Tasks = () =>{
         
       
         <li key={todo.id}>
-          <p>{todo.tittle} | {todo.description}</p>
+          <p>{todo.tittle} | {todo.description} <input onChange={handleChange}type="checkbox" name="completed" checked={todo.completed}></input></p>
           <button onClick={() => deleteTodo(todo.id)} className="btn btn-danger  btn-inline ms-3">Delete</button>
           <button  className="btn btn-info btn-inline ms-3">Edit</button>
 

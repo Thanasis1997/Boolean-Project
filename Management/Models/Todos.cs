@@ -7,12 +7,11 @@ namespace React_front_end.Models
 	public class Todos
 	{
 		public int Id { get; set; }
-		[Required]
 		public string tittle { get; set; }
-        [Required]
+        
 
         public string description { get; set; }
-        [Required]
+        
 
         public bool completed { get; set; } = false;
 

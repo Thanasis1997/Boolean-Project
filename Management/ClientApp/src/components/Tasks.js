@@ -109,8 +109,12 @@ const Tasks = () =>{
 
         return (
         <>
+      <div className="container">
 
         <h2>{user?.firstName } {user?.lastName}</h2>
+        <div className="row">
+          <div className="col">
+       
         <ul>
       {filteredData.map((todo) => (
         
@@ -126,7 +130,9 @@ const Tasks = () =>{
       ))}
     </ul>
         <button className="btn btn-primary" onClick={redirect}>Add Todo</button>
-
+              </div>
+           </div>
+        </div>
     </>
 
         

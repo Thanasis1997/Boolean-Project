@@ -4,7 +4,8 @@ import TodoList from "./TodoList";
 import Login from "./Login";
 const Tasks = () =>{
     // const navigate = useNavigate()
-    //Todo make the component visible to logged in user
+
+
     const initialstate = {
 
             tittle: "",
